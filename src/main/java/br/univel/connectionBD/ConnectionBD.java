@@ -1,4 +1,4 @@
-package br.univel.connectionBD.annotations;
+package br.univel.connectionBD;
 
 import java.io.IOException;
 import java.sql.Connection;

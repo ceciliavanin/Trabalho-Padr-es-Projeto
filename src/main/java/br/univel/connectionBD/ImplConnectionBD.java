@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.channels.spi.AbstractInterruptibleChannel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import br.univel.connectionBD.annotations.Column;
-import br.univel.connectionBD.annotations.ConnectionBD;
 import br.univel.connectionBD.annotations.Table;
 
 public class ImplConnectionBD implements ConnectionBD {
@@ -22,8 +22,8 @@ public class ImplConnectionBD implements ConnectionBD {
 			String user;
 			String password;
 
-			url = "jdbc:mysql:~/database";
-			user = "";
+			url = "jdbc:mysql:~/bancotads";
+			user = "root";
 			password = "";
 
 			try {
@@ -218,6 +218,19 @@ public class ImplConnectionBD implements ConnectionBD {
 
 				return ps;	
 			}
+		public static void main(String[] args) {
+			ImplConnectionBD con = new ImplConnectionBD();
+			try {
+				con.abrirConexao();
+				con.clone();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+
 }
-
-
