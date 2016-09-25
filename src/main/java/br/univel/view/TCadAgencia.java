@@ -1,3 +1,4 @@
+
 package br.univel.view;
 
 import javax.swing.JPanel;
@@ -5,13 +6,19 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
+
+import br.univel.banking.ImplOperacoes;
+
 import javax.swing.JButton;
 
 public class TCadAgencia extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField tfNome;
+	private JTextField tfNumero;
+	private JTextField tfCidade;
 
 	/**
 	 * Create the panel.
@@ -32,14 +39,14 @@ public class TCadAgencia extends JPanel {
 		gbc_lblNome.gridy = 1;
 		add(lblNome, gbc_lblNome);
 		
-		textField = new JTextField();
+		tfNome = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 2;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		add(tfNome, gbc_textField);
+		tfNome.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("N\u00FAmero:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -49,14 +56,14 @@ public class TCadAgencia extends JPanel {
 		gbc_lblNewLabel.gridy = 3;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField_1 = new JTextField();
+		tfNumero = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 4;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		add(tfNumero, gbc_textField_1);
+		tfNumero.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cidade:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -66,16 +73,23 @@ public class TCadAgencia extends JPanel {
 		gbc_lblNewLabel_1.gridy = 5;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		textField_2 = new JTextField();
+		tfCidade = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 6;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		add(tfCidade, gbc_textField_2);
+		tfCidade.setColumns(10);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				ImplOperacoes op = new ImplOperacoes();
+				op.cadAgencia(tfNome.getText(), tfNumero.getText(), tfCidade.getText());
+			}
+		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
 		gbc_btnConfirmar.anchor = GridBagConstraints.EAST;
 		gbc_btnConfirmar.insets = new Insets(0, 0, 0, 5);

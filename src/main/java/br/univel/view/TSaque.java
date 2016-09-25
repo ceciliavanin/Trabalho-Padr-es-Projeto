@@ -95,7 +95,7 @@ public class TSaque extends JPanel {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImplOperacoes op = new ImplOperacoes();
-				BigDecimal valor = new BigDecimal(textField.getText())
+				BigDecimal valor = new BigDecimal(textField.getText());
 				op.saques(valor);
 				DConfirmar confirmar = new DConfirmar();
 				confirmar.setLocationRelativeTo(null);;

@@ -2,17 +2,24 @@ package br.univel.view;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 
+import br.univel.banking.ImplOperacoes;
+
 public class TCadProfissional extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField tfNome;
+	private JTextField tfIdade;
+	private JTextField tfUsuario;
+	private JTextField tfSenhaAcesso;
+	private JTextField tfSenhaOperacoes;
 
 	/**
 	 * Create the panel.
@@ -33,15 +40,15 @@ public class TCadProfissional extends JPanel {
 		gbc_lblNome.gridy = 0;
 		add(lblNome, gbc_lblNome);
 		
-		textField = new JTextField();
+		tfNome = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridwidth = 4;
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 0;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		add(tfNome, gbc_textField);
+		tfNome.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Idade:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -51,14 +58,14 @@ public class TCadProfissional extends JPanel {
 		gbc_lblNewLabel.gridy = 1;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField_1 = new JTextField();
+		tfIdade = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 1;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		add(tfIdade, gbc_textField_1);
+		tfIdade.setColumns(10);
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
 		GridBagConstraints gbc_lblUsurio = new GridBagConstraints();
@@ -68,14 +75,14 @@ public class TCadProfissional extends JPanel {
 		gbc_lblUsurio.gridy = 2;
 		add(lblUsurio, gbc_lblUsurio);
 		
-		textField_2 = new JTextField();
+		tfUsuario = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 2;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		add(tfUsuario, gbc_textField_2);
+		tfUsuario.setColumns(10);
 		
 		JLabel lblSenhaDeAcessos = new JLabel("Senha de Acessos:");
 		GridBagConstraints gbc_lblSenhaDeAcessos = new GridBagConstraints();
@@ -85,14 +92,14 @@ public class TCadProfissional extends JPanel {
 		gbc_lblSenhaDeAcessos.gridy = 3;
 		add(lblSenhaDeAcessos, gbc_lblSenhaDeAcessos);
 		
-		textField_3 = new JTextField();
+		tfSenhaAcesso = new JTextField();
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.insets = new Insets(0, 0, 0, 5);
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.gridx = 1;
 		gbc_textField_3.gridy = 3;
-		add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		add(tfSenhaAcesso, gbc_textField_3);
+		tfSenhaAcesso.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha Opera\u00E7\u00F5es:");
 		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
@@ -102,14 +109,28 @@ public class TCadProfissional extends JPanel {
 		gbc_lblSenha.gridy = 3;
 		add(lblSenha, gbc_lblSenha);
 		
-		textField_4 = new JTextField();
+		tfSenhaOperacoes = new JTextField();
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.insets = new Insets(0, 0, 0, 5);
 		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_4.gridx = 3;
 		gbc_textField_4.gridy = 3;
-		add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
+		add(tfSenhaOperacoes, gbc_textField_4);
+		tfSenhaOperacoes.setColumns(10);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				ImplOperacoes op = new ImplOperacoes();
+				Integer idade = new Integer(tfIdade.getText());
+				op.cadProfissional(tfNome.getText(), idade, tfUsuario.getText(), tfSenhaAcesso.getText(), tfSenhaOperacoes.getText());
+			}
+		});
+		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
+		gbc_btnConfirmar.gridx = 4;
+		gbc_btnConfirmar.gridy = 3;
+		add(btnConfirmar, gbc_btnConfirmar);
 
 	}
 

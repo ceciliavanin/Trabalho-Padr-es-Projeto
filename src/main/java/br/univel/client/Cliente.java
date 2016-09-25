@@ -1,12 +1,23 @@
 package br.univel.client;
 
 import br.univel.Pessoa;
+import br.univel.connectionBD.annotations.Column;
 
 public class Cliente {
 
-    private String cpf, agencia;
-    private TipoConta tipoConta;
+	@Column (nome = "CPF", tamanho=11)
+    private String cpf;
+	
+	@Column (nome = "USER", tamanho=8)
+    private String agencia;
+    
+	@Column (nome = "TIPOCONTA", tamanho=2)
+	private TipoConta tipoConta;
+	
     private Pessoa p;
+    
+    public Cliente() {
+	}
 	public Cliente(String cpf, String agencia, String nome, String usuario, String senhaAcesso, String senhaOperacoes,
 			TipoConta tipoConta, int idade) {
 		super();

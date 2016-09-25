@@ -1,11 +1,15 @@
 package br.univel.view;
 
 import javax.swing.JPanel;
+
+import br.univel.client.ImplOperacoes;
+
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.awt.GridBagConstraints;
 
 public class TPrincipalBancario extends JPanel {
@@ -19,6 +23,13 @@ public class TPrincipalBancario extends JPanel {
 		setLayout(gridBagLayout);
 		
 		JButton btnInfContas = new JButton("1 - Informações de contas");
+		btnInfContas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DInfContas infConta = new DInfContas();
+				infConta.setLocationRelativeTo(null);;
+				infConta.setVisible(true);
+			}	
+			});	
 		GridBagConstraints gbc_btnInfContas = new GridBagConstraints();
 		gbc_btnInfContas.gridx = 1;
 		gbc_btnInfContas.gridy = 1;
@@ -26,6 +37,12 @@ public class TPrincipalBancario extends JPanel {
 
 		
 		JButton btnProfissionais = new JButton("4 -Profissionais");
+		btnProfissionais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TCadProfissional cadProfissional = new TCadProfissional();
+				cadProfissional.setVisible(true);
+			}	
+			});	
 		GridBagConstraints gbc_btnProfissionais = new GridBagConstraints();
 		gbc_btnProfissionais.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnProfissionais.insets = new Insets(0, 0, 5, 0);

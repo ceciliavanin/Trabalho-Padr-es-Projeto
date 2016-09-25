@@ -5,7 +5,13 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+
+import br.univel.banking.ImplOperacoes;
+
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPasswordField;
@@ -169,6 +175,13 @@ public class TCadCliente extends JPanel {
 		add(passwordField_1, gbc_passwordField_1);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				ImplOperacoes op = new ImplOperacoes();
+				op.novaConta(tf, idade, cpf, agencia, tipo, username, senhaAcesso, senhaOperacoes);
+			}
+		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
 		gbc_btnConfirmar.gridx = 4;
 		gbc_btnConfirmar.gridy = 7;
