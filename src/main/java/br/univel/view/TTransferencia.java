@@ -5,16 +5,24 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+
 import javax.swing.JTextField;
+
+import br.univel.client.ImplOperacoes;
+import br.univel.client.TipoConta;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 
 public class TTransferencia extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField tfAgencia;
+	private JTextField tfConta;
+	private JTextField tfTitular;
+	private JTextField tfValor;
 
 	/**
 	 * Create the panel.
@@ -43,23 +51,23 @@ public class TTransferencia extends JPanel {
 		gbc_lblConta.gridy = 1;
 		add(lblConta, gbc_lblConta);
 		
-		textField = new JTextField();
+		tfAgencia = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.anchor = GridBagConstraints.WEST;
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 2;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		add(tfAgencia, gbc_textField);
+		tfAgencia.setColumns(10);
 		
-		textField_1 = new JTextField();
+		tfConta = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.anchor = GridBagConstraints.WEST;
 		gbc_textField_1.gridx = 2;
 		gbc_textField_1.gridy = 2;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		add(tfConta, gbc_textField_1);
+		tfConta.setColumns(10);
 		
 		JLabel lblT = new JLabel("Tipo Conta:");
 		GridBagConstraints gbc_lblT = new GridBagConstraints();
@@ -69,7 +77,7 @@ public class TTransferencia extends JPanel {
 		gbc_lblT.gridy = 3;
 		add(lblT, gbc_lblT);
 		
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"CC - Conta Corrente", "CP - Conta Poupan\u00E7a", "CE - Conta Eletr\u00F4nica"}));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -86,14 +94,14 @@ public class TTransferencia extends JPanel {
 		gbc_lblNewLabel.gridy = 5;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField_2 = new JTextField();
+		tfTitular = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 6;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		add(tfTitular, gbc_textField_2);
+		tfTitular.setColumns(10);
 		
 		JLabel lblValor = new JLabel("Valor:");
 		GridBagConstraints gbc_lblValor = new GridBagConstraints();
@@ -103,16 +111,37 @@ public class TTransferencia extends JPanel {
 		gbc_lblValor.gridy = 7;
 		add(lblValor, gbc_lblValor);
 		
-		textField_3 = new JTextField();
+		tfValor = new JTextField();
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.anchor = GridBagConstraints.WEST;
 		gbc_textField_3.insets = new Insets(0, 0, 0, 5);
 		gbc_textField_3.gridx = 1;
 		gbc_textField_3.gridy = 8;
-		add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		add(tfValor, gbc_textField_3);
+		tfValor.setColumns(10);
 		
 		JButton btnConfirme = new JButton("Confirme");
+		btnConfirme.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TipoConta tipo = null;
+				ImplOperacoes op = new ImplOperacoes();
+				BigDecimal valor = new BigDecimal(tfValor.getText());
+				if (comboBox.getSelectedIndex()==0){
+					tipo = tipo.CC;
+				} else if (comboBox.getSelectedIndex()==1){
+					tipo = tipo.CP;
+				} else {
+					tipo = tipo.CE;
+				}
+					
+				op.transferencia(valor, tfAgencia.getText(), tfConta.getText(), tipo , tfTitular.getText());
+				DConfirmar confirmar = new DConfirmar();
+				confirmar.setLocationRelativeTo(null);;
+				confirmar.setVisible(true);
+			}	
+			});	
+		
 		GridBagConstraints gbc_btnConfirme = new GridBagConstraints();
 		gbc_btnConfirme.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnConfirme.insets = new Insets(0, 0, 0, 5);

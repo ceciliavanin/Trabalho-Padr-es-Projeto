@@ -3,7 +3,9 @@ package br.univel.client;
 import java.math.BigDecimal;
 
 public class ImplOperacoes implements Operacoes {
+	
 	private BigDecimal saldo;
+	
 	public BigDecimal getSaldo() {
 		return saldo;
 	}
@@ -57,6 +59,13 @@ public class ImplOperacoes implements Operacoes {
 	}
 
 	public void finalizar() {
+		
+	}
+
+	public void deposito(String agencia, String conta, TipoConta tipo, String titular, BigDecimal valor) {
+		BigDecimal saldo = getSaldo();
+		saldo.add(valor);
+		setSaldo(saldo);
 		
 	}
 

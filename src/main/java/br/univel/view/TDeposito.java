@@ -5,9 +5,16 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.JTextField;
+
+import br.univel.client.ImplOperacoes;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -18,10 +25,7 @@ public class TDeposito extends JPanel {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-
-	/**
-	 * Create the panel.
-	 */
+	JCheckBox chckbxNewCheckBox;
 	public TDeposito() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {20, 170, 190, 89};
@@ -47,14 +51,28 @@ public class TDeposito extends JPanel {
 		add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Confirmar");
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImplOperacoes op = new ImplOperacoes();
+				BigDecimal valor = new BigDecimal();
+				if (chckbxNewCheckBox.isSelected()){
+					op.depositoContaLogada(valor);
+				}else {
+					op.deposito(tex, conta, tipo, titular, valor);();
+				}
+				DConfirmar confirmar = new DConfirmar();
+				confirmar.setLocationRelativeTo(null);;
+				confirmar.setVisible(true);
+			}	
+			});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 0;
-		add(btnNewButton, gbc_btnNewButton);
+		add(btnConfirmar, gbc_btnNewButton);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Conta logada");
+		chckbxNewCheckBox = new JCheckBox("Conta logada");
 		GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
 		gbc_chckbxNewCheckBox.anchor = GridBagConstraints.WEST;
 		gbc_chckbxNewCheckBox.insets = new Insets(0, 0, 5, 5);

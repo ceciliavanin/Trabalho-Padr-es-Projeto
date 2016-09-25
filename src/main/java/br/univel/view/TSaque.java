@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.math.BigDecimal;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import br.univel.Cliente;
 import br.univel.Produto;
 import br.univel.SerIMP;
 import br.univel.Venda;
+import br.univel.client.ImplOperacoes;
 
 public class TSaque extends JPanel {
 	private JTextField textField;
@@ -92,6 +94,9 @@ public class TSaque extends JPanel {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ImplOperacoes op = new ImplOperacoes();
+				BigDecimal valor = new BigDecimal(textField.getText())
+				op.saques(valor);
 				DConfirmar confirmar = new DConfirmar();
 				confirmar.setLocationRelativeTo(null);;
 				confirmar.setVisible(true);
