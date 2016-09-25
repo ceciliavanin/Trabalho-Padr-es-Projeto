@@ -5,8 +5,18 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import br.univel.Cliente;
+import br.univel.Produto;
+import br.univel.SerIMP;
+import br.univel.Venda;
 
 public class TSaque extends JPanel {
 	private JTextField textField;
@@ -80,6 +90,13 @@ public class TSaque extends JPanel {
 		textField.setColumns(10);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DConfirmar confirmar = new DConfirmar();
+				confirmar.setLocationRelativeTo(null);;
+				confirmar.setVisible(true);
+			}	
+			});	
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
 		gbc_btnConfirmar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnConfirmar.gridx = 4;
