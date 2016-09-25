@@ -5,12 +5,19 @@ import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+
 import javax.swing.JTextField;
+
+import br.univel.client.ImplOperacoes;
+
 import javax.swing.JButton;
 
 public class TPagamento extends JPanel {
-	private JTextField tFCodBarra;
-	private JTextField tFValor;
+	private JTextField tfCodBarra;
+	private JTextField tfValor;
 
 	public TPagamento() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -28,14 +35,14 @@ public class TPagamento extends JPanel {
 		gbc_lblNewLabel.gridy = 1;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		tFCodBarra = new JTextField();
+		tfCodBarra = new JTextField();
 		GridBagConstraints gbc_tFCodBarra = new GridBagConstraints();
 		gbc_tFCodBarra.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFCodBarra.insets = new Insets(0, 0, 5, 5);
 		gbc_tFCodBarra.gridx = 1;
 		gbc_tFCodBarra.gridy = 2;
-		add(tFCodBarra, gbc_tFCodBarra);
-		tFCodBarra.setColumns(10);
+		add(tfCodBarra, gbc_tFCodBarra);
+		tfCodBarra.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Valor a ser pago");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -45,21 +52,32 @@ public class TPagamento extends JPanel {
 		gbc_lblNewLabel_1.gridy = 3;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		tFValor = new JTextField();
+		tfValor = new JTextField();
 		GridBagConstraints gbc_tFValor = new GridBagConstraints();
 		gbc_tFValor.anchor = GridBagConstraints.WEST;
 		gbc_tFValor.insets = new Insets(0, 0, 5, 5);
 		gbc_tFValor.gridx = 1;
 		gbc_tFValor.gridy = 4;
-		add(tFValor, gbc_tFValor);
-		tFValor.setColumns(10);
+		add(tfValor, gbc_tFValor);
+		tfValor.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Confirmar");
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImplOperacoes op = new ImplOperacoes();
+				BigDecimal valor = new BigDecimal(tfValor.getText());
+				op.pagamento(tfCodBarra.getText(), valor);
+				DConfirmar confirmar = new DConfirmar();
+				confirmar.setLocationRelativeTo(null);;
+				confirmar.setVisible(true);
+			}	
+			});	
+
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 6;
-		add(btnNewButton, gbc_btnNewButton);
+		add(btnConfirmar, gbc_btnNewButton);
 
 	}
 

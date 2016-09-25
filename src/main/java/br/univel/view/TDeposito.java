@@ -7,6 +7,7 @@ import java.awt.Component;
 import javax.swing.JTextField;
 
 import br.univel.client.ImplOperacoes;
+import br.univel.client.TipoConta;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -21,11 +22,12 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class TDeposito extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	JCheckBox chckbxNewCheckBox;
+	private JTextField tfValor;
+	private JTextField tfAgencia;
+	private JTextField tfConta;
+	private JTextField tfTitular;
+	private JCheckBox cbContaLogada;
+	private JComboBox comboBox;
 	public TDeposito() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {20, 170, 190, 89};
@@ -42,43 +44,49 @@ public class TDeposito extends JPanel {
 		gbc_lblInformeValorA.gridy = 0;
 		add(lblInformeValorA, gbc_lblInformeValorA);
 		
-		textField = new JTextField();
+		tfValor = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 2;
 		gbc_textField.gridy = 0;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		add(tfValor, gbc_textField);
+		tfValor.setColumns(10);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				TipoConta tipo = null;
 				ImplOperacoes op = new ImplOperacoes();
-				BigDecimal valor = new BigDecimal();
-				if (chckbxNewCheckBox.isSelected()){
-					op.depositoContaLogada(valor);
-				}else {
-					op.deposito(tex, conta, tipo, titular, valor);();
+				BigDecimal valor = new BigDecimal(tfValor.getText());
+				if (comboBox.getSelectedIndex()==0){
+					tipo = tipo.CC;
+				} else if (comboBox.getSelectedIndex()==1){
+					tipo = tipo.CP;
+				} else {
+					tipo = tipo.CE;
 				}
+					
+				op.deposito(tfAgencia.getText(), tfConta.getText(), tipo, tfTitular.getText(), valor);;
 				DConfirmar confirmar = new DConfirmar();
 				confirmar.setLocationRelativeTo(null);;
 				confirmar.setVisible(true);
 			}	
-			});
+			});	
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 0;
 		add(btnConfirmar, gbc_btnNewButton);
 		
-		chckbxNewCheckBox = new JCheckBox("Conta logada");
+		cbContaLogada = new JCheckBox("Conta logada");
 		GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
 		gbc_chckbxNewCheckBox.anchor = GridBagConstraints.WEST;
 		gbc_chckbxNewCheckBox.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxNewCheckBox.gridx = 1;
 		gbc_chckbxNewCheckBox.gridy = 2;
-		add(chckbxNewCheckBox, gbc_chckbxNewCheckBox);
+		add(cbContaLogada, gbc_chckbxNewCheckBox);
 		
 		JLabel lblAgncia = new JLabel("Ag\u00EAncia:");
 		GridBagConstraints gbc_lblAgncia = new GridBagConstraints();
@@ -96,23 +104,23 @@ public class TDeposito extends JPanel {
 		gbc_lblConta.gridy = 3;
 		add(lblConta, gbc_lblConta);
 		
-		textField_1 = new JTextField();
+		tfAgencia = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 4;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		add(tfAgencia, gbc_textField_1);
+		tfAgencia.setColumns(10);
 		
-		textField_2 = new JTextField();
+		tfConta = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.gridx = 2;
 		gbc_textField_2.gridy = 4;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		add(tfConta, gbc_textField_2);
+		tfConta.setColumns(10);
 		
 		JLabel lblTipoDeConta = new JLabel("Tipo de Conta:");
 		GridBagConstraints gbc_lblTipoDeConta = new GridBagConstraints();
@@ -122,7 +130,7 @@ public class TDeposito extends JPanel {
 		gbc_lblTipoDeConta.gridy = 5;
 		add(lblTipoDeConta, gbc_lblTipoDeConta);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Conta Corrente", "Conta Poupan\u00E7a", "Conta Eletr\u00F4nica"}));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -139,14 +147,14 @@ public class TDeposito extends JPanel {
 		gbc_lblTitular.gridy = 7;
 		add(lblTitular, gbc_lblTitular);
 		
-		textField_3 = new JTextField();
+		tfTitular = new JTextField();
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.insets = new Insets(0, 0, 0, 5);
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.gridx = 1;
 		gbc_textField_3.gridy = 8;
-		add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		add(tfTitular, gbc_textField_3);
+		tfTitular.setColumns(10);
 
 	}
 

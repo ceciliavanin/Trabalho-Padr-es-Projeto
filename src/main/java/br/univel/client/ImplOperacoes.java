@@ -26,15 +26,6 @@ public class ImplOperacoes implements Operacoes {
 		
 	}
 
-	
-
-	public Boolean depositoContaLogada(BigDecimal valor) {
-		BigDecimal saldo = getSaldo();
-		saldo.add(valor);
-		setSaldo(saldo);
-		return true;
-	}
-
 	public Boolean transferencia(BigDecimal valor, String agDestinatario, String contaDestinatario, TipoConta tipoConta,
 			String nome) {
 		BigDecimal saldo = getSaldo();
