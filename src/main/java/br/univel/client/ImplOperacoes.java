@@ -60,4 +60,9 @@ public class ImplOperacoes implements Operacoes {
 		
 	}
 
+	public Boolean depositoContaLogada(BigDecimal valor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

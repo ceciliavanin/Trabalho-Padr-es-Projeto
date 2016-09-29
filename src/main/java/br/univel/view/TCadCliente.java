@@ -5,12 +5,14 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
-
 import br.univel.banking.ImplOperacoes;
+import br.univel.banking.Operacoes;
+import br.univel.client.TipoConta;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -18,13 +20,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 public class TCadCliente extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JTextField tfNome;
+	private JTextField tfIdade;
+	private JTextField tfCPF;
+	private JTextField tfAgencia;
+	private JTextField tfUsuario;
+	private JPasswordField pfSenhaAcesso;
+	private JPasswordField pfSenhaOperacoes;
 
 	/**
 	 * Create the panel.
@@ -45,15 +47,15 @@ public class TCadCliente extends JPanel {
 		gbc_lblNewLabel.gridy = 1;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 4;
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 1;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		tfNome = new JTextField();
+		GridBagConstraints gbc_tFNome = new GridBagConstraints();
+		gbc_tFNome.gridwidth = 4;
+		gbc_tFNome.insets = new Insets(0, 0, 5, 0);
+		gbc_tFNome.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFNome.gridx = 1;
+		gbc_tFNome.gridy = 1;
+		add(tfNome, gbc_tFNome);
+		tfNome.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Idade:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -63,14 +65,15 @@ public class TCadCliente extends JPanel {
 		gbc_lblNewLabel_1.gridy = 2;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.anchor = GridBagConstraints.WEST;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 2;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		tfIdade = new JTextField();
+		GridBagConstraints gbc_tFIdade = new GridBagConstraints();
+		gbc_tFIdade.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFIdade.anchor = GridBagConstraints.NORTH;
+		gbc_tFIdade.insets = new Insets(0, 0, 5, 5);
+		gbc_tFIdade.gridx = 1;
+		gbc_tFIdade.gridy = 2;
+		add(tfIdade, gbc_tFIdade);
+		tfIdade.setColumns(10);
 		
 		JLabel lblCpf = new JLabel("CPF:");
 		GridBagConstraints gbc_lblCpf = new GridBagConstraints();
@@ -80,15 +83,15 @@ public class TCadCliente extends JPanel {
 		gbc_lblCpf.gridy = 2;
 		add(lblCpf, gbc_lblCpf);
 		
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.gridwidth = 2;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 3;
-		gbc_textField_2.gridy = 2;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		tfCPF = new JTextField();
+		GridBagConstraints gbc_tFCPF = new GridBagConstraints();
+		gbc_tFCPF.gridwidth = 2;
+		gbc_tFCPF.insets = new Insets(0, 0, 5, 0);
+		gbc_tFCPF.fill = GridBagConstraints.BOTH;
+		gbc_tFCPF.gridx = 3;
+		gbc_tFCPF.gridy = 2;
+		add(tfCPF, gbc_tFCPF);
+		tfCPF.setColumns(10);
 		
 		JLabel lblAgncia = new JLabel("Ag\u00EAncia:");
 		GridBagConstraints gbc_lblAgncia = new GridBagConstraints();
@@ -98,14 +101,15 @@ public class TCadCliente extends JPanel {
 		gbc_lblAgncia.gridy = 3;
 		add(lblAgncia, gbc_lblAgncia);
 		
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.anchor = GridBagConstraints.WEST;
-		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_3.gridx = 1;
-		gbc_textField_3.gridy = 3;
-		add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		tfAgencia = new JTextField();
+		GridBagConstraints gbc_tFAgencia = new GridBagConstraints();
+		gbc_tFAgencia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFAgencia.anchor = GridBagConstraints.ABOVE_BASELINE;
+		gbc_tFAgencia.insets = new Insets(0, 0, 5, 5);
+		gbc_tFAgencia.gridx = 1;
+		gbc_tFAgencia.gridy = 3;
+		add(tfAgencia, gbc_tFAgencia);
+		tfAgencia.setColumns(10);
 		
 		JLabel lblTipoDeConta = new JLabel("Tipo de Conta:");
 		GridBagConstraints gbc_lblTipoDeConta = new GridBagConstraints();
@@ -115,15 +119,15 @@ public class TCadCliente extends JPanel {
 		gbc_lblTipoDeConta.gridy = 3;
 		add(lblTipoDeConta, gbc_lblTipoDeConta);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"CC - Conta Corrente", "CP - Conta Poupan\u00E7a", "CE - Conta Eletr\u00F4nica"}));
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.gridwidth = 2;
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 3;
-		gbc_comboBox.gridy = 3;
-		add(comboBox, gbc_comboBox);
+		final JComboBox cBTipoConta = new JComboBox();
+		cBTipoConta.setModel(new DefaultComboBoxModel(new String[] {"CC - Conta Corrente", "CP - Conta Poupan\u00E7a", "CE - Conta Eletr\u00F4nica"}));
+		GridBagConstraints gbc_cBTipoConta = new GridBagConstraints();
+		gbc_cBTipoConta.gridwidth = 2;
+		gbc_cBTipoConta.insets = new Insets(0, 0, 5, 0);
+		gbc_cBTipoConta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cBTipoConta.gridx = 3;
+		gbc_cBTipoConta.gridy = 3;
+		add(cBTipoConta, gbc_cBTipoConta);
 		
 		JLabel lblNewLabel_2 = new JLabel("Usu\u00E1rio:");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
@@ -133,14 +137,14 @@ public class TCadCliente extends JPanel {
 		gbc_lblNewLabel_2.gridy = 5;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		textField_4 = new JTextField();
-		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-		gbc_textField_4.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_4.gridx = 1;
-		gbc_textField_4.gridy = 5;
-		add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
+		tfUsuario = new JTextField();
+		GridBagConstraints gbc_tFUsuario = new GridBagConstraints();
+		gbc_tFUsuario.insets = new Insets(0, 0, 5, 5);
+		gbc_tFUsuario.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFUsuario.gridx = 1;
+		gbc_tFUsuario.gridy = 5;
+		add(tfUsuario, gbc_tFUsuario);
+		tfUsuario.setColumns(10);
 		
 		JLabel lblSenhaAcesso = new JLabel("Senha Acesso:");
 		GridBagConstraints gbc_lblSenhaAcesso = new GridBagConstraints();
@@ -150,13 +154,13 @@ public class TCadCliente extends JPanel {
 		gbc_lblSenhaAcesso.gridy = 6;
 		add(lblSenhaAcesso, gbc_lblSenhaAcesso);
 		
-		passwordField = new JPasswordField();
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField.gridx = 1;
-		gbc_passwordField.gridy = 6;
-		add(passwordField, gbc_passwordField);
+		pfSenhaAcesso = new JPasswordField();
+		GridBagConstraints gbc_pFSenhaAcesso = new GridBagConstraints();
+		gbc_pFSenhaAcesso.insets = new Insets(0, 0, 5, 5);
+		gbc_pFSenhaAcesso.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pFSenhaAcesso.gridx = 1;
+		gbc_pFSenhaAcesso.gridy = 6;
+		add(pfSenhaAcesso, gbc_pFSenhaAcesso);
 		
 		JLabel lblNewLabel_3 = new JLabel("Senha Opera\u00E7\u00F5es:");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
@@ -166,20 +170,32 @@ public class TCadCliente extends JPanel {
 		gbc_lblNewLabel_3.gridy = 6;
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		passwordField_1 = new JPasswordField();
-		GridBagConstraints gbc_passwordField_1 = new GridBagConstraints();
-		gbc_passwordField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField_1.gridx = 3;
-		gbc_passwordField_1.gridy = 6;
-		add(passwordField_1, gbc_passwordField_1);
+		pfSenhaOperacoes = new JPasswordField();
+		GridBagConstraints gbc_pFSenhaOperacoes = new GridBagConstraints();
+		gbc_pFSenhaOperacoes.insets = new Insets(0, 0, 5, 5);
+		gbc_pFSenhaOperacoes.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pFSenhaOperacoes.gridx = 3;
+		gbc_pFSenhaOperacoes.gridy = 6;
+		add(pfSenhaOperacoes, gbc_pFSenhaOperacoes);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				ImplOperacoes op = new ImplOperacoes();
-				op.novaConta(tf, idade, cpf, agencia, tipo, username, senhaAcesso, senhaOperacoes);
+				TipoConta tipo = null;
+				Operacoes op = new ImplOperacoes();
+				if (cBTipoConta.getSelectedIndex()==0){
+					tipo = tipo.CC;
+				} else if (cBTipoConta.getSelectedIndex()==1){
+					tipo = tipo.CP;
+				} else {
+					tipo = tipo.CE;
+				}
+				int idade = Integer.parseInt(tfIdade.getText());	
+				op.novaConta(tfNome.getText(), idade, tfCPF.getText(), tfAgencia.getText(), tipo, tfUsuario.getText(), pfSenhaAcesso.getText(), pfSenhaOperacoes.getText());
+				DConfirmar confirmar = new DConfirmar();
+				confirmar.setLocationRelativeTo(null);;
+				confirmar.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();

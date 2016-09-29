@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 import br.univel.banking.ImplOperacoes;
+import br.univel.banking.Operacoes;
 
 import javax.swing.JButton;
 
@@ -86,7 +87,7 @@ public class TCadAgencia extends JPanel {
 		btnConfirmar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				ImplOperacoes op = new ImplOperacoes();
+				Operacoes op = new ImplOperacoes();
 				op.cadAgencia(tfNome.getText(), tfNumero.getText(), tfCidade.getText());
 			}
 		});

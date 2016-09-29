@@ -218,19 +218,5 @@ public class ImplConnectionBD implements ConnectionBD {
 
 				return ps;	
 			}
-		public static void main(String[] args) {
-			ImplConnectionBD con = new ImplConnectionBD();
-			try {
-				con.abrirConexao();
-				con.clone();
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage());
-			} catch (CloneNotSupportedException e) {
-				e.printStackTrace();
-			}
-			
-			
-		}
 
 }

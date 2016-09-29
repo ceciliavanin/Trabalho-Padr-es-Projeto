@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 import br.univel.banking.ImplOperacoes;
+import br.univel.banking.Operacoes;
 
 public class TCadProfissional extends JPanel {
 	private JTextField tfNome;
@@ -122,7 +123,7 @@ public class TCadProfissional extends JPanel {
 		btnConfirmar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				ImplOperacoes op = new ImplOperacoes();
+				Operacoes op = new ImplOperacoes();
 				Integer idade = new Integer(tfIdade.getText());
 				op.cadProfissional(tfNome.getText(), idade, tfUsuario.getText(), tfSenhaAcesso.getText(), tfSenhaOperacoes.getText());
 			}

@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import javax.swing.JTextField;
 
 import br.univel.client.ImplOperacoes;
+import br.univel.client.Operacoes;
 import br.univel.client.TipoConta;
 
 import javax.swing.JComboBox;
@@ -125,7 +126,7 @@ public class TTransferencia extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				TipoConta tipo = null;
-				ImplOperacoes op = new ImplOperacoes();
+				Operacoes op = new ImplOperacoes();
 				BigDecimal valor = new BigDecimal(tfValor.getText());
 				if (comboBox.getSelectedIndex()==0){
 					tipo = tipo.CC;

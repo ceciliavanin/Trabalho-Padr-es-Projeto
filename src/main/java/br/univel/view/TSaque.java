@@ -13,11 +13,6 @@ import java.math.BigDecimal;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import br.univel.Cliente;
-import br.univel.Produto;
-import br.univel.SerIMP;
-import br.univel.Venda;
 import br.univel.client.ImplOperacoes;
 
 public class TSaque extends JPanel {

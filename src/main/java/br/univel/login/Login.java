@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.awt.event.ActionEvent; 
 import javax.swing.text.*;
 
+import br.univel.connectionBD.ConnectionBD;
 import br.univel.connectionBD.ImplConnectionBD;
+import br.univel.view.TMain;
 
 import javax.swing.*;
 
@@ -93,7 +95,8 @@ public class Login extends JFrame {
 
                 String sql = "select * from usuario where usuario like "
                 + loginTxt.getText()+" and senha like "+ senha +"'";
-                Connection con = ImplConnectionBD.abrirConexao();
+                Connection con = (Connection) new ImplConnectionBD();
+                ((ConnectionBD) con).abrirConexao();
                 java.sql.Statement stm = con.createStatement(); 
                 rs = stm.executeQuery(sql);// exexuta a varialvel sql acima
 

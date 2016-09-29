@@ -1,19 +1,19 @@
 package br.univel.view;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import br.univel.client.ImplOperacoes;
-
-import javax.swing.JButton;
+import br.univel.client.Operacoes;
 
 public class TPagamento extends JPanel {
 	private JTextField tfCodBarra;
@@ -64,7 +64,7 @@ public class TPagamento extends JPanel {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ImplOperacoes op = new ImplOperacoes();
+				Operacoes op = new ImplOperacoes();
 				BigDecimal valor = new BigDecimal(tfValor.getText());
 				op.pagamento(tfCodBarra.getText(), valor);
 				DConfirmar confirmar = new DConfirmar();
